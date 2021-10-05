@@ -1,4 +1,6 @@
 import discord
+from dotenv import load_dotenv
+import os
 
 client = discord.Client()
 
@@ -14,5 +16,5 @@ async def on_message(message):
     if message.content in ('hello','hi'):
         await message.channel.send("Welcome to Adam Pollack's server!")
 
-
-client.run('ODk1MDI4MzgxMjMyNTI5NDM5.YVymIg.PkknL5pEvrH82snWxdIan2OMPxM')
+load_dotenv('.env')
+client.run(os.getenv('TUTORIAL_BOT_TOKEN'))
