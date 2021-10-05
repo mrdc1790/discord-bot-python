@@ -1,6 +1,8 @@
 # https://unicode.org/emoji/charts/full-emoji-list.html
 
 import discord
+from dotenv import load_dotenv
+import os
 
 client = discord.Client()
 
@@ -27,4 +29,5 @@ async def on_message_edit(before, after):
 async def on_reaction_add(reaction, user):
     await reaction.message.channel.send(f'{user} reacted with {reaction.emoji}')
 
-client.run('ODk1MDI4MzgxMjMyNTI5NDM5.YVymIg.PkknL5pEvrH82snWxdIan2OMPxM')
+load_dotenv('.env')
+client.run(os.getenv('TUTORIAL_BOT_TOKEN'))
