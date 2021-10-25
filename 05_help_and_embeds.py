@@ -1,8 +1,10 @@
+import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import os
 
 bot = commands.Bot(command_prefix='!')
+bot.remove_command('help')
 
 @bot.command()
 async def clear(ctx, amount):
@@ -32,7 +34,7 @@ async def spit_on(ctx, *args):
 @bot.command()
 async def punch(ctx, arg):
     """
-    !punch Justin
+    This command punches another player
     """
 
     await ctx.send(f"Punched {arg}")
@@ -53,10 +55,38 @@ async def info(ctx):
 @bot.command()
 async def double_punch(ctx, arg1, arg2):
     """
-    !punch Justin Evan
+    !double_punch Justin Evan
     """
 
     await ctx.send(f"Double punched {arg1} and {arg2} ")
+
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(
+        title="Bot Commands",
+        description="Welcome to the help section. Here are all the commands for this game!",
+        color=discord.Colour.green()
+    )
+    embed.set_thumbnail(url='https://avatars.githubusercontent.com/u/61246494?v=4')
+
+    embed.add_field(
+        name='!help',
+        value='List all of the commands',
+        inline=True
+    )
+
+    embed.add_field(
+        name='!show',
+        value='shows commands',
+        inline=True
+    )
+
+    embed.add_field(
+        name='!punch',
+        value='This command punches another player',
+        inline=True
+    )
+    await ctx.send(embed=embed)
 
 load_dotenv('.env')
 bot.run(os.getenv('TUTORIAL_BOT_TOKEN'))
