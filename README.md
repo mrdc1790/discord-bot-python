@@ -1,15 +1,19 @@
-# Project Setup
+# Discord Bot Tutorials
 
- Created a bot as admin for discord server through python.
+Install the project dependencies in a Python virtual environment.
 
- Follow the steps below to set up the project on your enviornment.
+    python -m pip install -r requirements.txt
 
- ## Local Development
+Copy [.env.example](.env.example) to .env and set TUTORIAL_BOT_TOKEN to your
+bot token. Keep .env private. In the Discord Developer Portal, enable the
+Message Content intent for the message and command examples. The reaction
+roles example needs Server Members intent and a configured target message
+and roles. [Gateway intents guide](https://discordpy.readthedocs.io/en/stable/intents.html)
 
-Create a venv with Python 3.7 or higher.
+Run one example at a time.
 
-Install required packages:
+    python 01_on_message.py
 
-```
-pip3 install -r requirements.txt
-```
+For the command demos, !clear accepts a count from 1 to 100. It requires
+Manage Messages for the caller and Manage Messages and Read Message History
+for the bot.

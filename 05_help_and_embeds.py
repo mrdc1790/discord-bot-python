@@ -1,14 +1,20 @@
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
-import os
 
-bot = commands.Bot(command_prefix='!')
+from bot_setup import message_intents, run_demo
+
+bot = commands.Bot(command_prefix='!', intents=message_intents())
 bot.remove_command('help')
 
 @bot.command()
-async def clear(ctx, amount):
-    await ctx.channel.purge(limit=int(amount)+1)
+@commands.guild_only()
+@commands.has_permissions(manage_messages=True)
+@commands.bot_has_permissions(manage_messages=True, read_message_history=True)
+async def clear(ctx, amount: int):
+    if not 1 <= amount <= 100:
+        await ctx.send('Enter a message count from 1 to 100.')
+        return
+    await ctx.channel.purge(limit=amount + 1)
 
 @bot.command()
 async def show(ctx):
@@ -25,6 +31,9 @@ async def spit_on(ctx, *args):
     ^variable length and is a list
     """
 
+    if not args:
+        await ctx.send('Usage: !spit_on NAME [NAME ...]')
+        return
     if len(args) > 1:
         everyone = ' and '.join([', '.join(args[:-1]), args[-1]] if len(args) > 2 else args)
     else:
@@ -88,5 +97,6 @@ async def help(ctx):
     )
     await ctx.send(embed=embed)
 
-load_dotenv('.env')
-bot.run(os.getenv('TUTORIAL_BOT_TOKEN'))
+
+if __name__ == '__main__':
+    run_demo(bot)

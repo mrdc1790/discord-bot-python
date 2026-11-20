@@ -1,16 +1,6 @@
 import discord
-from discord import player
-from dotenv import load_dotenv
-import os
-"""
-client = discord.Client()
 
-@client.event
-async def on_ready():
-    print('Online')
-
-client.run(os.getenv('TUTORIAL_BOT_TOKEN'))
-"""
+from bot_setup import run_demo
 
 # https://discordpy.readthedocs.io/en/latest/intents.html
 # https://discord.com/developers/docs/topics/gateway#gateway-intents
@@ -71,5 +61,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 client = myClient(intents=intents)
-load_dotenv('.env')
-client.run(os.getenv('TUTORIAL_BOT_TOKEN'))
+
+
+if __name__ == '__main__':
+    run_demo(client)
