@@ -1,5 +1,9 @@
 # Discord Bot Tutorials
 
+Five standalone Python examples that build up a Discord bot from message events to reactions, role assignment, commands, and embedded help. The moderation example limits message purges and checks permissions. [Start with message events](01_on_message.py) · [Command example](04_commands.py)
+
+## Run locally
+
 Install the project dependencies in a Python virtual environment.
 
     python -m pip install -r requirements.txt
